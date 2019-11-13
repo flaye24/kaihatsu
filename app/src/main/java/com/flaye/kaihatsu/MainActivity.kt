@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.ui.core.Text
 import androidx.ui.core.dp
@@ -22,27 +25,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class MainActivity : AppCompatActivity() {
-    private val TAG = this::class.java.simpleName
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifecycleScope.launch {
 
-            val firebaseFirestore = FirebaseFirestore.getInstance()
-            var sortedHiraganaItems: List<HiraganaItem>? = null
-            try {
-                val snapshot = firebaseFirestore.collection("hiraganas").get().await()
-                val hiraganaItems = snapshot.toObjects(HiraganaItem::class.java)
-                sortedHiraganaItems = hiraganaItems.sortedBy { it.kana }
-            } catch (exception: FirebaseFirestoreException) {
-                Log.w(TAG, "Error getting documents.", exception)
+        val viewModel = ViewModelProviders.of(this)[HiraganasListViewModel::class.java]
+        viewModel.hiraganaItemsLiveData.observe(this, Observer {
+            setContent {
+                createListView(it)
             }
-            sortedHiraganaItems?.let {
-                setContent {
-                    createListView(it)
-                }
-            }
-        }
+        })
 
     }
 }
