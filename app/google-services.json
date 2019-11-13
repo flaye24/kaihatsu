@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "149869857107",
+    "firebase_url": "https://kaihatsu-1778b.firebaseio.com",
+    "project_id": "kaihatsu-1778b",
+    "storage_bucket": "kaihatsu-1778b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149869857107:android:f60bdb9a19955de4eaf9a6",
+        "android_client_info": {
+          "package_name": "com.flaye.kaihatsu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149869857107-ll24dka22433cvb2tl2so2512vfeibh0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0NdH8ht9YZkUa2AVT7MIr6_51l5RZVH8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149869857107-ll24dka22433cvb2tl2so2512vfeibh0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
