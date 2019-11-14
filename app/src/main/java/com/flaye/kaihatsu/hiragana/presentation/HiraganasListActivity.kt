@@ -1,13 +1,9 @@
-package com.flaye.kaihatsu
+package com.flaye.kaihatsu.hiragana.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.lifecycleScope
 import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.core.setContent
@@ -19,17 +15,13 @@ import androidx.ui.layout.Padding
 import androidx.ui.material.Divider
 import androidx.ui.material.MaterialTheme
 import androidx.ui.tooling.preview.Preview
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel = ViewModelProviders.of(this)[HiraganasListViewModel::class.java]
-        viewModel.hiraganaItemsLiveData.observe(this, Observer {
+        getViewModel<HiraganasListViewModel>().hiraganaItemsLiveData.observe(this, Observer {
             setContent {
                 createListView(it)
             }
@@ -44,7 +36,9 @@ private fun createListView(hiraganaItems: List<HiraganaItem>) {
         VerticalScroller {
             Column {
                 hiraganaItems.forEach {
-                    createHiraganaItem(it)
+                    createHiraganaItem(
+                        it
+                    )
                     Divider(color = Color.Gray, height = 1.dp)
                 }
             }
@@ -68,7 +62,12 @@ private fun createHiraganaItem(hiraganaItem: HiraganaItem) {
 @Composable
 fun DefaultPreview() {
     MaterialTheme {
-        val hiraganaItems = listOf(HiraganaItem("あ", "a"), HiraganaItem("い", "i"))
+        val hiraganaItems = listOf(
+            HiraganaItem(
+                "あ",
+                "a"
+            ), HiraganaItem("い", "i")
+        )
         createListView(hiraganaItems)
     }
 }
