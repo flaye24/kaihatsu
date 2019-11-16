@@ -15,7 +15,7 @@ class KaihatsuApplication : Application() {
     private val hiraganasModule = module {
         viewModel {
             HiraganasListViewModel(
-                get()
+                get(), get()
             )
         }
         factory {
@@ -24,6 +24,7 @@ class KaihatsuApplication : Application() {
             ) as HiraganaRemoteDataSource
         }
         single { FirebaseFirestore.getInstance() }
+        single { SpeechManagerImpl(get()) as SpeechManager }
     }
 
     override fun onCreate() {
