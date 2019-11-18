@@ -1,6 +1,7 @@
 package com.flaye.kaihatsu.hiragana.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.lifecycle.Observer
@@ -17,6 +18,11 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.tooling.preview.Preview
 import com.flaye.kaihatsu.R
 import com.flaye.kaihatsu.VectorImageButton
+import com.flaye.kaihatsu.hiragana.source.model.HiraganaDto
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -31,8 +37,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+
+
     }
 }
+
 
 @Composable
 private fun createListView(
